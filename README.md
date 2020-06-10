@@ -74,3 +74,22 @@ This project is a little web/rest application using Slim Framework 2, acting lik
     var content = response.Content; // raw content as string
 
 ```
+3. Configure API URL
+
+Update API_URL in setup.php, replace with your mailwizz domain.
+
+Changelog: add ABSoft api endpoint:
+
+
+    #get list customer
+    /absoft/customers  
+    #get list by customer, param: customer_id
+    /absoft/get-lists-by-customer 
+    #create new list
+    /absoft/create-list 
+    #upload zip file
+    /absoft/upload
+    #upload base 64 string
+    /absoft/upload-base64
+    #get list's subscriber
+    /absoft/subscribers

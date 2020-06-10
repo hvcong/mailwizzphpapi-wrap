@@ -38,3 +38,5 @@ MailWizzApi_Autoloader::register();
 
 // start UTC
 date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+define('API_URL', 'https://<your mailwizz domain>/api/index.php');

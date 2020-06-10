@@ -41,6 +41,31 @@ class MailWizzApi_Endpoint_Lists extends MailWizzApi_Base
         
         return $response = $client->request();
     }
+
+    public function getListsByCustomer($customer_id,$page = 1, $perPage = 10)
+    {
+        $client = new MailWizzApi_Http_Client(array(
+            'method'        => MailWizzApi_Http_Client::METHOD_GET,
+            'url'           => $this->config->getApiUrl('absoft-get-lists-by-customer'),
+            'paramsGet'     => array(
+                'page'      => (int)$page,
+                'per_page'  => (int)$perPage,
+                'customer_id' => $customer_id
+            ),
+            'enableCache'   => true,
+        ));
+
+        return $response = $client->request();
+    }
+
+    public function createByCustomerId($customer_id, $data){
+        $client = new MailWizzApi_Http_Client(array(
+            'method'        => MailWizzApi_Http_Client::METHOD_POST,
+            'url'           => $this->config->getApiUrl(sprintf('absoft-create-list-by-customer?customer_id=%s', (int)$customer_id)),
+            'paramsPost'    => $data,
+        ));
+        return $response = $client->request();
+    }
     
     /**
      * Get one list

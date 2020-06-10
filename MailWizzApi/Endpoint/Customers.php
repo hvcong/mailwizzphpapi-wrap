@@ -50,4 +50,46 @@ class MailWizzApi_Endpoint_Customers extends MailWizzApi_Base
         
         return $response = $client->request();
     }
+
+    public function getLists($page = 1, $perPage = 10)
+    {
+        $client = new MailWizzApi_Http_Client(array(
+            'method'        => MailWizzApi_Http_Client::METHOD_GET,
+            'url'           => $this->config->getApiUrl('absoft-customers'),
+            'paramsGet'     => array(
+                'page'      => (int)$page,
+                'per_page'  => (int)$perPage
+            ),
+            'enableCache'   => true,
+        ));
+
+        return $response = $client->request();
+    }
+
+    public function upload(array $data){
+        if (isset($data['content'])) {
+            $data['content'] = base64_encode($data['content']);
+        }
+
+        if (isset($data['archive'])) {
+            $data['archive'] = base64_encode($data['archive']);
+        }
+
+        $client = new MailWizzApi_Http_Client(array(
+            'method'        => MailWizzApi_Http_Client::METHOD_POST,
+            'url'           => $this->config->getApiUrl('absoft-upload'),
+            'paramsPost'    => $data
+        ));
+
+        return $response = $client->request();
+    }
+    public function upload_base64(array $data){
+        $client = new MailWizzApi_Http_Client(array(
+            'method'        => MailWizzApi_Http_Client::METHOD_POST,
+            'url'           => $this->config->getApiUrl('absoft-upload-base64'),
+            'paramsPost'    => $data
+        ));
+
+        return $response = $client->request();
+    }
 }
